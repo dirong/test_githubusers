@@ -47,7 +47,7 @@ public class UsersAdapter extends RecyclerViewAdapter<UsersAdapter.ViewHolder> {
         holder.topShadow.setVisibility(position == 0 ? VISIBLE : GONE);
         holder.url.setText(user.getUrl());
         Picasso.with(context)
-                .load(user.getAvatarWithSize(100))
+                .load(user.getAvatarWithSize(User.SMALL_AVATAR_SIZE))
                 .placeholder(R.drawable.avatar_placeholder)
                 .into(holder.photo);
     }
@@ -65,13 +65,13 @@ public class UsersAdapter extends RecyclerViewAdapter<UsersAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         @InjectView(R.id.photo)
-        ImageView photo;
+        public ImageView photo;
         @InjectView(R.id.name)
-        TextView name;
+        public TextView name;
         @InjectView(R.id.shadow)
-        View topShadow;
+        public View topShadow;
         @InjectView(R.id.url)
-        TextView url;
+        public TextView url;
 
         public ViewHolder(View item) {
             super(item);

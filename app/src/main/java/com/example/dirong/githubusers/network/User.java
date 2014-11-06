@@ -11,6 +11,8 @@ import com.example.dirong.githubusers.utils.URLUtils;
 public class User implements Parcelable {
 
     private static final String SIZE_PHOTO_PARAMETER = "size";
+    public static final int SMALL_AVATAR_SIZE = 100;
+    public static final int NORMAL_AVATAR_SIZE = 400;
 
     Long id;
 

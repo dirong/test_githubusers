@@ -1,5 +1,7 @@
 package com.example.dirong.githubusers.ui.activity;
 
+import android.content.Intent;
+import android.graphics.Rect;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -8,11 +10,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.dirong.githubusers.GithubUsersApplication;
 import com.example.dirong.githubusers.R;
+import com.example.dirong.githubusers.model.PhotoViewData;
 import com.example.dirong.githubusers.network.GitHub;
+import com.example.dirong.githubusers.ui.adapter.RecyclerViewAdapter;
 import com.example.dirong.githubusers.ui.adapter.UsersAdapter;
 import com.example.dirong.githubusers.network.User;
 
@@ -73,6 +78,18 @@ public class UsersActivity extends ActionBarActivity {
         DefaultItemAnimator animator = new DefaultItemAnimator();
         recyclerView.setItemAnimator(animator);
         adapter = new UsersAdapter(this);
+        adapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClicked(View view, int position) {
+                Rect rect = new Rect();
+                UsersAdapter.ViewHolder holder = new UsersAdapter.ViewHolder(view);
+                holder.photo.getGlobalVisibleRect(rect);
+                PhotoViewData photoViewData = new PhotoViewData(users.get(position), rect);
+                Intent intent = new Intent(UsersActivity.this, PhotoViewActivity.class);
+                intent.putExtra(PhotoViewActivity.PHOTO_VIEW_DATA, photoViewData);
+                startActivity(intent);
+            }
+        });
         recyclerView.setAdapter(adapter);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
