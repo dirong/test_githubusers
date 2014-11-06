@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.example.dirong.githubusers.utils.URLUtils;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by dirong on 11/6/14.
@@ -18,8 +19,10 @@ public class User implements Parcelable {
 
     String login;
 
-    String avatar_url;
+    @SerializedName("avatar_url")
+    String avatar;
 
+    @SerializedName("html_url")
     String url;
 
     public User() {
@@ -42,7 +45,7 @@ public class User implements Parcelable {
     }
 
     public String getAvatar() {
-        return avatar_url;
+        return avatar;
     }
 
     public String getUrl() {
@@ -54,7 +57,7 @@ public class User implements Parcelable {
     }
 
     public String getAvatarWithSize(int size) {
-        return URLUtils.addParameter(avatar_url, SIZE_PHOTO_PARAMETER, String.valueOf(size));
+        return URLUtils.addParameter(avatar, SIZE_PHOTO_PARAMETER, String.valueOf(size));
     }
 
     @Override
@@ -66,14 +69,14 @@ public class User implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(this.id);
         dest.writeString(this.login);
-        dest.writeString(this.avatar_url);
+        dest.writeString(this.avatar);
         dest.writeString(this.url);
     }
 
     private User(Parcel in) {
         this.id = (Long) in.readValue(Long.class.getClassLoader());
         this.login = in.readString();
-        this.avatar_url = in.readString();
+        this.avatar = in.readString();
         this.url = in.readString();
     }
 
