@@ -49,8 +49,7 @@ public class PhotoViewActivity extends Activity {
                 progress.setVisibility(View.VISIBLE);
                 Picasso.with(PhotoViewActivity.this)
                         .load(photoViewData.getUser().getAvatarWithSize(User.NORMAL_AVATAR_SIZE))
-                        .noFade()
-                        .noPlaceholder()
+                        .placeholder(image.getDrawable())
                         .into(image, new Callback() {
                             @Override
                             public void onSuccess() {
@@ -83,4 +82,5 @@ public class PhotoViewActivity extends Activity {
         super.onSaveInstanceState(outState);
         outState.putParcelable(PHOTO_VIEW_DATA, photoViewData);
     }
+
 }

@@ -20,6 +20,7 @@ import com.example.dirong.githubusers.network.GitHub;
 import com.example.dirong.githubusers.ui.adapter.RecyclerViewAdapter;
 import com.example.dirong.githubusers.ui.adapter.UsersAdapter;
 import com.example.dirong.githubusers.network.User;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,7 +129,6 @@ public class UsersActivity extends ActionBarActivity {
     public void onPause() {
         super.onPause();
         swipeRefreshLayout.setRefreshing(false);
-
     }
 
 }
